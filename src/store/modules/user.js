@@ -8,13 +8,15 @@ const userStore = createSlice({
     name: "user",
     // data state declaration
     initialState: {
-        token: ''  // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
+        token: localStorage.getItem('token_key') || ''  // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
 
     },
     // Synchronous edit-method
     reducers: {
         setToken(state, action) {
-            state.token = action.payload   // 从states中获取token数据，从action中的载荷做一个赋值            
+            state.token = action.payload   // 从states中获取token数据，从action中的载荷做一个赋值  
+            // localstorage
+            localStorage.setItem('token_key', action.payload)
         }
     }
 

@@ -33,7 +33,7 @@ const Login = () => {
                                 message: 'Please enter mobilephone number!',
                             },
                             {
-                                pattern: /\d{11}$/,
+                                pattern: /^1[3-9]\d{9}$/,
                                 message: 'Please enter the correct mobile phone number format'
                             },
                         ]}>
