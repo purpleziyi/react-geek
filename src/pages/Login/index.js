@@ -1,10 +1,22 @@
 import './index.scss'
-import { Card, Form, Input, Button } from 'antd'
+import { Card, Form, Input, Button, message } from 'antd'
 import logo from '@/assets/logo.png'
+import { useDispatch } from 'react-redux'
+import { fetchLogin } from '@/store/modules/user'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-    const onFinish = (values) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const onFinish = async (values) => {
         console.log(values);
+        // trigger async action : fetchLogin
+        await dispatch(fetchLogin(values))  // make sure that dispatch-function is completed then jump
+        // 1. Jump to home page
+        navigate('/')
+        // reminder user
+        message.success("login successful")
+
     }
     return (
         <div className="login">
@@ -21,7 +33,7 @@ const Login = () => {
                                 message: 'Please enter mobilephone number!',
                             },
                             {
-                                pattern: /\d{8}$/,
+                                pattern: /\d{11}$/,
                                 message: 'Please enter the correct mobile phone number format'
                             },
                         ]}>
