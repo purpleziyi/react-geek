@@ -1,5 +1,51 @@
+import './index.scss'
+import { Card, Form, Input, Button } from 'antd'
+import logo from '@/assets/logo.png'
+
 const Login = () => {
-    return <div>this is Login</div>
+    const onFinish = (values) => {
+        console.log(values);
+    }
+    return (
+        <div className="login">
+            <Card className="login-container">
+                <img className="login-logo" src={logo} alt="" />
+                {/* 登录表单 */}
+                <Form onFinish={onFinish} validateTrigger="onBlur">
+                    <Form.Item
+                        name="mobile"
+                        //Multiple verification logic. Verify the 1st firstly, then verify 2nd one after 1st one passes.
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please enter mobilephone number!',
+                            },
+                            {
+                                pattern: /\d{8}$/,
+                                message: 'Please enter the correct mobile phone number format'
+                            },
+                        ]}>
+                        <Input size="large" placeholder="Please enter mobilephone number" />
+                    </Form.Item>
+                    <Form.Item
+                        name="code"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'please enter verification code!',
+                            },
+                        ]}>
+                        <Input size="large" placeholder="please enter verification code" />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" size="large" block>
+                            Login
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Card>
+        </div>
+    )
 }
 
 export default Login
