@@ -1,20 +1,22 @@
 // state management related to the user
 
-import { createSlice } from "@reduxjs/toolkit";
-import { request } from "@/utils";
+import { createSlice } from '@reduxjs/toolkit'
+import { setToken as _setToken, getToken } from '@/utils'
+import { request } from '@/utils'
 
 
 const userStore = createSlice({
     name: "user",
     // data state declaration
     initialState: {
-        token: localStorage.getItem('token_key') || ''  // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
+        token: getToken() || ''  // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
 
     },
     // Synchronous edit-method
     reducers: {
         setToken(state, action) {
             state.token = action.payload   // 从states中获取token数据，从action中的载荷做一个赋值  
+            _setToken(action.payload)
             // localstorage
             localStorage.setItem('token_key', action.payload)
         }
