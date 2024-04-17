@@ -1,5 +1,7 @@
 // encapsulation of axios
 import axios from "axios";
+import { getToken, removeToken } from "./token"
+import router from "@/router"
 
 // 1. Root domain name configuration
 // 2. Timeout period
@@ -16,10 +18,10 @@ request.interceptors.request.use((config) => {
     // 操作这个config 注入token数据
     // 1. 获取到token
     // 2. 按照后端的格式要求做token拼接
-    // const token = getToken()
-    // if (token) {
-    //     config.headers.Authorization = `Bearer ${token}`
-    // }
+    const token = getToken()
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config
 }, (error) => {
     return Promise.reject(error)
@@ -35,12 +37,12 @@ request.interceptors.response.use((response) => {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     // 监控401 token失效
-    // console.dir(error)
-    // if (error.response.status === 401) {
-    //     removeToken()
-    //     router.navigate('/login')
-    //     window.location.reload()
-    // }
+    console.dir(error)
+    if (error.response.status === 401) {
+        removeToken()
+        router.navigate('/login')
+        window.location.reload()
+    }
     return Promise.reject(error)
 })
 
