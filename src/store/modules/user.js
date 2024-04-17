@@ -1,8 +1,8 @@
 // state management related to the user
 
 import { createSlice } from '@reduxjs/toolkit'
-import { setToken as _setToken, getToken, removeToken } from '@/utils'
-import { request } from '@/utils'
+import { setToken as _setToken, getToken, removeToken, request } from '@/utils'
+import { loginAPI, getProfileAPI } from '@/apis/user'
 
 
 const userStore = createSlice({
@@ -42,7 +42,7 @@ const userReducer = userStore.reducer
 const fetchLogin = (loginForm) => {
     return async (dispatch) => {
         // 1. send async request
-        const res = await request.post('/authorizations', loginForm)
+        const res = await loginAPI(loginForm)
         // 2. submit sync action for storing token
         dispatch(setToken(res.data.token))
     }
@@ -51,7 +51,7 @@ const fetchLogin = (loginForm) => {
 // asynchronous method - get personal infomation
 const fetchUserInfo = () => {
     return async (dispatch) => {
-        const res = await request.get('/user/profile')
+        const res = await getProfileAPI()
         dispatch(setUserInfo(res.data))
     }
 }
