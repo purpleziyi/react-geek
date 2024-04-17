@@ -6,7 +6,7 @@ import {
     LogoutOutlined,
 } from '@ant-design/icons'
 import './index.scss'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
 const { Header, Sider } = Layout
 
@@ -35,6 +35,14 @@ const GeekLayout = () => {
         const path = route.key
         navigate(path)  // 将path作为路径参数放入可以navigate函数中
     }
+
+    // reverse highlight
+    // 1. Get the current path with useLocation()
+    const location = useLocation()
+    console.log(location.pathname)
+    const selectedkey = location.pathname
+
+
     return (
         <Layout>
             <Header className="header">
@@ -53,7 +61,7 @@ const GeekLayout = () => {
                     <Menu
                         mode="inline"
                         theme="dark"
-                        defaultSelectedKeys={['1']}
+                        selectedKeys={selectedkey}
                         onClick={onMenuClik}
                         items={items}
                         style={{ height: '100%', borderRight: 0 }}></Menu>
