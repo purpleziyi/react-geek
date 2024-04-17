@@ -6,29 +6,35 @@ import {
     LogoutOutlined,
 } from '@ant-design/icons'
 import './index.scss'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const { Header, Sider } = Layout
 
 const items = [
     {
         label: 'Home',
-        key: '1',
+        key: '/',
         icon: <HomeOutlined />,
     },
     {
         label: 'Article Management',
-        key: '2',
+        key: '/article',
         icon: <DiffOutlined />,
     },
     {
         label: 'Article Creation',
-        key: '3',
+        key: '/publish',
         icon: <EditOutlined />,
     },
 ]
 
 const GeekLayout = () => {
+    const navigate = useNavigate() //用于跳转页面
+    const onMenuClik = (route) => {
+        console.log("menu is clicked", route);
+        const path = route.key
+        navigate(path)  // 将path作为路径参数放入可以navigate函数中
+    }
     return (
         <Layout>
             <Header className="header">
@@ -48,6 +54,7 @@ const GeekLayout = () => {
                         mode="inline"
                         theme="dark"
                         defaultSelectedKeys={['1']}
+                        onClick={onMenuClik}
                         items={items}
                         style={{ height: '100%', borderRight: 0 }}></Menu>
                 </Sider>
