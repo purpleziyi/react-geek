@@ -1,7 +1,7 @@
 // state management related to the user
 
 import { createSlice } from '@reduxjs/toolkit'
-import { setToken as _setToken, getToken } from '@/utils'
+import { setToken as _setToken, getToken, removeToken } from '@/utils'
 import { request } from '@/utils'
 
 
@@ -22,13 +22,18 @@ const userStore = createSlice({
         },
         setUserInfo(state, action) {
             state.userInfo = action.payload
+        },
+        clearUserInfo(state) {
+            state.token = ''
+            state.userInfo = {}
+            removeToken()
         }
     }
 
 })
 
 // Deconstruct actionCreator
-const { setToken, setUserInfo } = userStore.actions
+const { setToken, setUserInfo, clearUserInfo } = userStore.actions
 
 // get reducer-function
 const userReducer = userStore.reducer
@@ -51,5 +56,6 @@ const fetchUserInfo = () => {
     }
 }
 
-export { setToken, fetchLogin, fetchUserInfo }
+export { fetchLogin, fetchUserInfo, clearUserInfo }
+
 export default userReducer
