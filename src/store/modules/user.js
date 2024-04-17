@@ -9,8 +9,8 @@ const userStore = createSlice({
     name: "user",
     // data state declaration
     initialState: {
-        token: getToken() || ''  // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
-
+        token: getToken() || '', // 此处的初始值由后端返回值的格式决定，后端将返回String，所以此处是空串
+        userInfo: {}
     },
     // Synchronous edit-method
     reducers: {
@@ -19,13 +19,16 @@ const userStore = createSlice({
             _setToken(action.payload)
             // localstorage
             localStorage.setItem('token_key', action.payload)
+        },
+        setUserInfo(state, action) {
+            state.userInfo = action.payload
         }
     }
 
 })
 
 // Deconstruct actionCreator
-const { setToken } = userStore.actions
+const { setToken, setUserInfo } = userStore.actions
 
 // get reducer-function
 const userReducer = userStore.reducer
@@ -40,5 +43,13 @@ const fetchLogin = (loginForm) => {
     }
 }
 
-export { setToken, fetchLogin }
+// asynchronous method - get personal infomation
+const fetchUserInfo = () => {
+    return async (dispatch) => {
+        const res = await request.get('/user/profile')
+        dispatch(setUserInfo(res.data))
+    }
+}
+
+export { setToken, fetchLogin, fetchUserInfo }
 export default userReducer

@@ -7,6 +7,9 @@ import {
 } from '@ant-design/icons'
 import './index.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUserInfo } from '@/store/modules/user'
 
 const { Header, Sider } = Layout
 
@@ -42,13 +45,19 @@ const GeekLayout = () => {
     console.log(location.pathname)
     const selectedkey = location.pathname
 
+    // action that trigger userInfo
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchUserInfo())
+    }, [dispatch])
 
+    const name = useSelector(state => state.user.userInfo.name)
     return (
         <Layout>
             <Header className="header">
 
                 <div className="user-info">
-                    <span className="user-name">purpleZiyi</span>
+                    <span className="user-name">{name}</span>
                     <span className="user-logout">
                         <Popconfirm title="Confirm to logout?？" okText="logout" cancelText="cancell">
                             <LogoutOutlined /> Logout
