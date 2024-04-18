@@ -13,6 +13,9 @@ import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.scss'
 
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+
 const { Option } = Select
 
 const Publish = () => {
@@ -52,7 +55,14 @@ const Publish = () => {
                         label="centent"
                         name="content"
                         rules={[{ required: true, message: 'Please enter the article content' }]}
-                    ></Form.Item>
+                    >
+                        {/* 富文本编辑器 */}
+                        <ReactQuill
+                            className="publish-quill"   // 为了更改富文本的高度，所以增加一个className，以便在scss文件中定义高度
+                            theme="snow"
+                            placeholder="Please enter the article content"
+                        />
+                    </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 4 }}>
                         <Space>
