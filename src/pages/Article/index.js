@@ -98,7 +98,7 @@ const Article = () => {
         per_page: 4
     })
 
-    // 获取文章列表
+    // get article list  获取文章列表
     const [list, setList] = useState([])
     const [count, setCount] = useState(0)
     useEffect(() => {
@@ -181,13 +181,13 @@ const Article = () => {
 
                     <Form.Item>
                         <Button type="primary" htmlType="submit" style={{ marginLeft: 40 }}>
-                            筛选
+                            Filter
                         </Button>
                     </Form.Item>
                 </Form>
             </Card>
             {/* 表格区域 */}
-            <Card title={`根据筛选条件共查询到 ${count} 条结果：`}>
+            <Card title={`A total of ${count} results were found based on the filter conditions:`}>
                 <Table rowKey="id" columns={columns} dataSource={list} pagination={{
                     total: count,
                     pageSize: reqData.per_page,

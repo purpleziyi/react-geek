@@ -28,8 +28,7 @@ export function updateArticleAPI(data) {
 }
 
 
-// 获取文章列表
-
+// get article list
 export function getArticleListAPI(params) {
     return request({
         url: "/mp/articles",
