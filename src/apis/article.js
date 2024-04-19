@@ -18,8 +18,7 @@ export function createArticleAPI(data) {
     })
 }
 
-// 更新文章表单
-
+// update article form
 export function updateArticleAPI(data) {
     return request({
         url: `/mp/articles/${data.id}?draft=false`,
