@@ -9,7 +9,7 @@ export function getChannelAPI() {
     })
 }
 
-// 2. submit 
+// 2. submit form
 export function createArticleAPI(data) {
     return request({
         url: '/mp/articles?draft=false',
