@@ -58,6 +58,14 @@ const Publish = () => {
         setImageList(value.fileList)
     }
 
+    // 切换图片封面类型
+    const [imageType, setImageType] = useState(0)
+    const onTypeChange = (e) => {
+        console.log('切换封面了', e.target.value)
+        setImageType(e.target.value)  //实现状态影响视图的变化
+    }
+
+
     return (
         <div className="publish">
             <Card
@@ -72,7 +80,7 @@ const Publish = () => {
                 <Form
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 16 }}
-                    initialValues={{ type: 1 }}
+                    initialValues={{ type: 0 }}  //控制整个表单区域的初始值
                     onFinish={onFinish}
                 >
                     <Form.Item
@@ -94,7 +102,7 @@ const Publish = () => {
                     </Form.Item>
                     <Form.Item label="Cover">
                         <Form.Item name="type">
-                            <Radio.Group>
+                            <Radio.Group onChange={onTypeChange}>
                                 <Radio value={1}>single picture</Radio>
                                 <Radio value={3}>three pictures</Radio>
                                 <Radio value={0}>no picture</Radio>
@@ -104,19 +112,19 @@ const Publish = () => {
                             listType: 决定选择文件框的外观样式
                             showUploadList: 控制显示上传列表
                         */}
-                        <Upload
+                        {imageType > 0 && <Upload
                             listType="picture-card"
                             showUploadList
                             action={'http://geek.itheima.net/v1_0/upload'}
                             name='image'
                             onChange={onChange}
-                        // maxCount={imageType}
-                        // fileList={imageList}
+                            maxCount={imageType}
+                            fileList={imageList}
                         >
                             <div style={{ marginTop: 8 }}>
                                 <PlusOutlined />
                             </div>
-                        </Upload>
+                        </Upload>}
                     </Form.Item>
                     <Form.Item
                         label="centent"
