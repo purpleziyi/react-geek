@@ -7,7 +7,8 @@ import {
     Input,
     Upload,
     Space,
-    Select
+    Select,
+    message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
@@ -15,35 +16,37 @@ import './index.scss'
 
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { useEffect, useState } from 'react'
-import { getChannelAPI, createArticleAPI } from '@/apis/article'
+import { useState } from 'react'
+import { createArticleAPI } from '@/apis/article'
+import { useChannel } from '@/hooks/useChannel'
 
 const { Option } = Select
 
 const Publish = () => {
-    // get channel list
-    const [channelList, setChannelList] = useState([])
-    useEffect(() => {
-        // 1. 封装函数 在函数体内调用接口
-        const getChannelList = async () => {
-            const res = await getChannelAPI()
-            setChannelList(res.data.channels)
-        }
-        // 2. 调用函数
-        getChannelList()
-    }, [])
+    // 获取频道列表
+    const { channelList } = useChannel()
 
     // submit-form
     const onFinish = (formValue) => {
-        console.log(formValue);
+        console.log(formValue)
+        // 校验封面类型imageType是否和实际的图片列表imageList数量是相等的
+        if (imageList.length !== imageType) return message.warning('Cover type and number of images do not match配')
         const { title, content, channel_id } = formValue
         // 1. 按照接口文档的格式处理收集到的表单数据
         const reqData = {
             title,
             content,
             cover: {
-                type: 0,
-                image: []
+                type: imageType, // 封面模式
+                // 这里的url处理逻辑只是在新增时候的逻辑
+                // 编辑的时候需要做处理
+                images: imageList.map(item => {    // 图片列表
+                    if (item.response) {
+                        return item.response.data.url
+                    } else {
+                        return item.url
+                    }
+                }) // 图片列表
             },
             channel_id
         }
@@ -118,7 +121,7 @@ const Publish = () => {
                             action={'http://geek.itheima.net/v1_0/upload'}
                             name='image'
                             onChange={onChange}
-                            maxCount={imageType}
+                            maxCount={imageType}  // 限制上传的图片数量的上限
                             fileList={imageList}
                         >
                             <div style={{ marginTop: 8 }}>
