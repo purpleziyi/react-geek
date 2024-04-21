@@ -38,7 +38,7 @@ export function getArticleListAPI(params) {
 }
 
 
-// 删除文章
+// delete article
 
 export function delArticleAPI(id) {
     return request({

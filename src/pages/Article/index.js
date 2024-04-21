@@ -69,7 +69,7 @@ const Article = () => {
                         <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={() => navigate(`/publish?id=${data.id}`)} />
                         <Popconfirm
                             title="delete article"
-                            description="Are you sure you want to delete the current article?"
+                            description="Are you sure to delete the current article?"
                             onConfirm={() => onConfirm(data)}
                             okText="Yes"
                             cancelText="No"
@@ -126,7 +126,7 @@ const Article = () => {
         // reqData依赖项发生变化 重复执行副作用函数 
     }
 
-    // 分页
+    // pagination
     const onPageChange = (page) => {
         console.log(page)
         // 修改参数依赖项 引发数据的重新获取列表渲染
@@ -136,7 +136,7 @@ const Article = () => {
         })
     }
 
-    // 删除
+    // delete-function
     const onConfirm = async (data) => {
         console.log('删除点击了', data)
         await delArticleAPI(data.id)
