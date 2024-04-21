@@ -94,7 +94,7 @@ const Publish = () => {
             }))
         }
         // 只有有id的时候才能调用此函数回填
-        if (articleId) {
+        if (articleId) {   // 根据是否有id来做适配
             getArticleDetail()
         }
         // 2. 调用实例方法 完成回填
@@ -107,7 +107,7 @@ const Publish = () => {
                 title={
                     <Breadcrumb items={[
                         { title: <Link to={'/'}>Home</Link> },
-                        { title: 'Publish Article' },
+                        { title: `${articleId ? 'Edit' : 'Public'} Article` },
                     ]}
                     />
                 }
