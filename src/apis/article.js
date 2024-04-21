@@ -48,7 +48,7 @@ export function delArticleAPI(id) {
 }
 
 
-// 获取文章详情
+// get article details  
 
 export function getArticleById(id) {
     return request({
