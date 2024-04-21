@@ -17,7 +17,7 @@ import './index.scss'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useEffect, useState } from 'react'
-import { createArticleAPI, getArticleById, } from '@/apis/article'
+import { createArticleAPI, getArticleById, updateArticleAPI } from '@/apis/article'
 import { useChannel } from '@/hooks/useChannel'
 
 const { Option } = Select
@@ -39,19 +39,25 @@ const Publish = () => {
             cover: {
                 type: imageType, // 封面模式
                 // 这里的url处理逻辑只是在新增时候的逻辑
-                // 编辑的时候需要做处理
+                // 编辑的时候需要另做处理
                 images: imageList.map(item => {    // 图片列表
                     if (item.response) {
-                        return item.response.data.url
+                        return item.response.data.url // 有response字段的话就在response下面寻找
                     } else {
-                        return item.url
+                        return item.url   // 没有response时就在0和1的情况下寻找
                     }
                 }) // 图片列表
             },
             channel_id
         }
         // 2. 调用接口提交
-        createArticleAPI(reqData)
+        // 处理调用不同的接口 新增 （没有id）- 新增接口  编辑状态（有id） - 更新接口 
+        if (articleId) {    // if id exists
+            // 更新接口
+            updateArticleAPI({ ...reqData, id: articleId })
+        } else {
+            createArticleAPI(reqData)
+        }
     }
 
     // 上传回调
