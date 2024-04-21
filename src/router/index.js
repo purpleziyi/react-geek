@@ -1,36 +1,45 @@
 // router配置
 
-import Layout from '@/pages/Layout'
+import Layout from '@/pages/Layout'  // src/pages/layout
 import Login from '@/pages/Login'
-import { createBrowserRouter } from "react-router-dom";
+
+import { createBrowserRouter } from 'react-router-dom'
 import { AuthRoute } from '@/components/AuthRoute'
-import Home from '@/pages/Home'
-import Article from '@/pages/Article';
-import Publish from '@/pages/Publish';
+// import Home from '@/pages/Home'
+// import Article from '@/pages/Article'
+// import Publish from '@/pages/Publish'
+import { Suspense, lazy } from 'react'
+
+// 1. lazy函数对组件进行导入
+const Home = lazy(() => import('@/pages/Home'))
+const Article = lazy(() => import('@/pages/Article'))
+const Publish = lazy(() => import('@/pages/Publish'))
 
 // configure router-instance
+// 配置路由实例
+
 const router = createBrowserRouter([
     {
         path: "/",
         element: <AuthRoute> <Layout /></AuthRoute>,
         children: [
             {
-                path: 'home',
-                element: <Home />
+                index: true,
+                element: <Suspense fallback={'loading...'}><Home /></Suspense>
             },
             {
                 path: 'article',
-                element: <Article />
+                element: <Suspense fallback={'loading...'}><Article /></Suspense>
             },
             {
                 path: 'publish',
-                element: <Publish />
+                element: <Suspense fallback={'loading...'}><Publish /></Suspense>
             }
         ]
     },
     {
         path: "/login",
-        element: <Login />,
+        element: <Login />
     }
 ])
 

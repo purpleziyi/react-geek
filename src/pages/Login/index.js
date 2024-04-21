@@ -16,7 +16,6 @@ const Login = () => {
         navigate('/')
         // reminder user
         message.success("login successful")
-
     }
     return (
         <div className="login">
@@ -33,7 +32,7 @@ const Login = () => {
                                 message: 'Please enter mobilephone number!',
                             },
                             {
-                                pattern: /^1[3-9]\d{9}$/,
+                                pattern: /^1[3-9]\d{9}$/,      // custom to ED region
                                 message: 'Please enter the correct mobile phone number format'
                             },
                         ]}>
