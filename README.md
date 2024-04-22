@@ -1,4 +1,4 @@
-### Screenshot of project interface
+### Screenshot of project 
 
 **Home**
 ![image](https://github.com/purpleziyi/react-geek/assets/161695864/46a6c082-20bf-4d06-ae73-74b937c37394)
