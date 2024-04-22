@@ -1,8 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, Breadcrumb, Form, Button, Radio, DatePicker, Select, Popconfirm } from 'antd'
 
-// import locale from 'antd/es/date-picker/locale/zh_CN'   // 引入汉化包 时间选择器显示中文
-
 // import resources
 import { Table, Tag, Space } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
