@@ -1,3 +1,27 @@
+### Screenshot of project interface
+
+**Home**
+![image](https://github.com/purpleziyi/react-geek/assets/161695864/46a6c082-20bf-4d06-ae73-74b937c37394)
+
+**Article Creation**
+single picture:
+
+![image](https://github.com/purpleziyi/react-geek/assets/161695864/11816940-3321-4d4b-bdc6-86692fc964cb)
+
+three pictures:
+
+![image](https://github.com/purpleziyi/react-geek/assets/161695864/925056e9-ec99-4484-9b82-76c93fbaa37d)
+
+
+**Article Management**
+
+![image](https://github.com/purpleziyi/react-geek/assets/161695864/f122308c-9525-4751-bb7f-7dbfe9a1d31a)
+
+![image](https://github.com/purpleziyi/react-geek/assets/161695864/086a94d6-19e6-469e-aaa2-b704cdb433b0)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -6,7 +30,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+ `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
